@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史提交记录</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: black; /* 修改为黑色 */
+            text-decoration: none; /* 去掉下划线 */
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline; /* 鼠标悬停时下划线 */
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .status-pass {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .status-no-pass {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .code-toggle {
+            cursor: pointer;
+            color: #FF7BFF; /* 保持为蓝色 */
+            text-decoration: none; /* 去掉下划线 */
+            display: flex;
+            align-items: center;
+        }
+        .arrow {
+            margin-right: 5px;
+            transition: transform 0.3s;
+        }
+        pre {
+            display: none;
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+    </style>
+    <script>
+        function toggleCode(element) {
+            const codeBlock = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+            if (codeBlock.style.display === 'block') {
+                codeBlock.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                codeBlock.style.display = 'block';
+                arrow.style.transform = 'rotate(90deg)';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>历史提交记录</h1>
+        <nav>
+            <a href="{{ url_for('user_home') }}">返回主页</a>
+        </nav>
+    </header>
+    <div class="container">
+        <ul>
+            {% for entry, code in user_submissions.items() %}
+                <li>
+                    <strong>{{ entry }}</strong>
+                    <span class="{{ 'status-no-pass' if 'NO PASS' in entry else 'status-pass' }}">
+                        {{ '未通过' if 'NO PASS' in entry else '通过' }}
+                    </span>
+                    <div class="code-toggle" onclick="toggleCode(this)">
+                        <span class="arrow">&gt;</span>
+                        {{ '查看代码' if 'NO PASS' not in entry else '查看错误代码' }}
+                    </div>
+                    <pre>{{ code }}</pre>
+                </li>
+            {% else %}
+                <li>
+                    <div style="text-align: center; color: #999;">
+                        没有历史提交记录。
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; 2024 提交记录系统. 保留所有权利.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+        a {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* 初始透明度 */
+            transition: opacity 0.5s ease-in-out; /* 淡入效果 */
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        p.guide {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #555; /* 引导语颜色 */
+        }
+        .section {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+{% for i in range(19): %}
+<br>
+{% endfor %}
+    <h1>欢迎来到问答平台</h1>
+    <a href="{{ url_for('questions') }}">查看题目列表</a>
+    <a href="{{ url_for('admin') }}">管理员页面</a>
+    <p class="guide">向下滑动以查看更多内容！</p>
+
+    <div class="content" id="moreContent">
+        <div class="section">
+            <h2>平台介绍</h2>
+            <p>我们提供一个开放的问答平台，欢迎每个人参与。</p>
+            <p>无论你是想提问还是回答，都能在这里找到你需要的信息。</p>
+        </div>
+        <div class="section">
+            <h2>热门问题</h2>
+            <p>这里是一些热门问题的链接，帮助你快速找到感兴趣的内容。</p>
+            <ul>
+                <li><a href="#">问题一：如何学习HTML？</a></li>
+                <li><a href="#">问题二：CSS与JS的区别？</a></li>
+                <li><a href="#">问题三：如何优化网站性能？</a></li>
+                <li><a href="#">问题四：前端框架的选择？</a></li>
+                <li><a href="#">问题五：如何提高编程能力？</a></li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>最新更新</h2>
+            <p>我们不断更新平台内容，确保信息的准确性和时效性。</p>
+            <p>请关注我们的动态，以获取最新的问答。</p>
+        </div>
+        <div class="section">
+            <h2>社区互动</h2>
+            <p>参与我们的社区讨论，分享你的见解和经验。</p>
+            <p>你的每个回答都可能帮助到他人。</p>
+        </div>
+        <div class="section">
+            <h2>联系我们</h2>
+            <p>如有任何疑问，请通过以下方式联系我们。</p>
+            <p>Email: XX64107866xx@163.com</p>
+            <p>QQ: 3242247564</p>
+            <p>欢迎随时联系我们，我们将竭诚为您服务。</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var content = document.getElementById('moreContent');
+            var windowHeight = window.innerHeight;
+            var contentTop = content.getBoundingClientRect().top;
+
+            // 当内容进入视窗时，设置透明度为1，触发淡入效果
+            if (contentTop < windowHeight) {
+                content.style.opacity = 1;
+            }
+        });
+    </script>
+</body>
+</html>

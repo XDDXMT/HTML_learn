@@ -1,0 +1,125 @@
+[
+    {
+        "id": 1,
+        "title": "创建一个简单的欢迎页面",
+        "description": "请使用<h1>和<p>标签，创建一个带有欢迎内容的HTML页面。",
+        "required_tags": [
+            "html",
+            "head",
+            "title",
+            "body",
+            "h1",
+            "p"
+        ],
+        "keywords": [
+            "欢迎"
+        ],
+        "example_code": "<h1>欢迎</h1>\n<p>你好，世界！</p>",
+        "save": "True"
+    },
+    {
+        "id": 2,
+        "title": "创建一个个人介绍页面",
+        "description": "请使用<h1>,<p>,<ul>,<li>标签，展示您的个人介绍。",
+        "required_tags": [
+            "html",
+            "head",
+            "title",
+            "body",
+            "h1",
+            "p",
+            "ul",
+            "li"
+        ],
+        "keywords": [
+            "介绍"
+        ],
+        "example_code": "<h1>个人介绍</h1>\n<p>我是一名学生。</p>\n<ul>\n    <li>爱好: 阅读</li>\n    <li>兴趣: 编程</li>\n</ul>",
+        "save": "False"
+    },
+    {
+        "id": 3,
+        "title": "创建一个关于我的页面",
+        "description": "请使用<h1>,<h2>,<p>和<a>标签，展示关于我的信息，并添加一个链接到我的个人网站。",
+        "required_tags": [
+            "html",
+            "head",
+            "title",
+            "body",
+            "h1",
+            "h2",
+            "p",
+            "a"
+        ],
+        "keywords": [
+            "关于我"
+        ],
+        "example_code": "<h1>关于我</h1>\n<h2>个人信息</h2>\n<p>我是一名Web开发者。</p>\n<a href='https://mywebsite.com'>访问我的网站</a>",
+        "save": "False"
+    },
+    {
+        "id": 4,
+        "title": "创建一个联系我页面",
+        "description": "请使用<form>标签，创建一个简单的联系表单，包含姓名、邮箱和消息输入框。",
+        "required_tags": [
+            "html",
+            "head",
+            "title",
+            "body",
+            "form",
+            "input",
+            "textarea"
+        ],
+        "keywords": [
+            "联系"
+        ],
+        "example_code": "<form>\n    <label for='name'>姓名:</label>\n    <input type='text' id='name' name='name'><br>\n    <label for='email'>邮箱:</label>\n    <input type='email' id='email' name='email'><br>\n    <label for='message'>消息:</label>\n    <textarea id='message' name='message'></textarea><br>\n    <input type='submit' value='发送'>\n</form>",
+        "save": "False"
+    },
+    {
+        "id": 5,
+        "title": "创建一个我的爱好页面",
+        "description": "请使用<h1>,<ul>,<li>和<p>标签，列出您的爱好，并为每个爱好提供简要描述。",
+        "required_tags": [
+            "html",
+            "head",
+            "title",
+            "body",
+            "h1",
+            "ul",
+            "li",
+            "p"
+        ],
+        "keywords": [
+            "爱好"
+        ],
+        "example_code": "<h1>我的爱好</h1>\n<ul>\n    <li>阅读: 我喜欢读小说。</li>\n    <li>旅行: 我热爱探索新地方。</li>\n</ul>",
+        "save": "False"
+    },
+    {
+        "id": 6,
+        "title": "我的世界的一个神秘城市",
+        "description": "？",
+        "required_tags": [
+            "<p>"
+        ],
+        "keywords": [
+            "hi"
+        ],
+        "example_code": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "save": "True"
+    },
+    {
+        "id": 7,
+        "title": "aaa",
+        "description": "aaa",
+        "required_tags": [
+            "aaa"
+        ],
+        "keywords": [
+            "aaa"
+        ],
+        "example_code": "asd",
+        "save": "False"
+    }
+]

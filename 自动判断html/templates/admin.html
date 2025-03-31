@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        ul li a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        ul li a:hover {
+            background-color: #0056b3;
+        }
+        form {
+            margin-top: 30px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>管理</h2>
+        <ul>
+            <li>
+                <a href="/admin/variables">所有变量内容</a>
+                <a href="/admin/modify">修改文件</a>
+                <a href="{{ url_for('admin_nav') }}">返回管理员导航</a>
+            </li>
+        </ul>
+
+        <h2>检查 HTML 代码</h2>
+        <form action="{{ url_for('submit_html_check') }}" method="post">
+            <textarea name="code" placeholder="请输入 HTML 代码" rows="10" required></textarea>
+            <input type="hidden" name="question_id" value="0"> <!-- 假设没有特定问题 -->
+            <button type="submit">检查代码</button>
+        </form>
+        {% if check_result %}
+        <h3>检查结果:</h3>
+        <p>{{ check_result }}</p>
+        {% endif %}
+        <h2>题目管理</h2>
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <span>{{ question.title }}</span>
+                    <span>
+                        <a href="/submit/{{ question.id }}">测试</a>
+                        <a href="/admin/delete/{{ question.id }}" style="background-color: #dc3545;">删除</a>
+                        <form action="{{ url_for('show_example_code', question_id=question.id) }}" method="get" style="display:inline;">
+                        <a href="{{ url_for('show_example_code', question_id=question.id) }}">查看示例代码</a>
+
+                        </form>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>添加新题目</h2>
+        <form action="/admin/add" method="post">
+            <label>题目标题：</label>
+            <input type="text" name="title" required><br><br>
+            <label>描述：</label>
+            <textarea name="description" rows="3" required></textarea><br><br>
+            <label>必需标签 (逗号分隔)：</label>
+            <input type="text" name="required_tags" required><br><br>
+            <label>关键字 (逗号分隔)：</label>
+            <input type="text" name="keywords" required><br><br>
+            <label>示例代码：</label>
+            <textarea name="example_code" rows="3" required></textarea><br><br>
+            <input type="checkbox" name="interests" value="save"> 保存文件在系统?
+            <input type="submit" value="添加题目">
+        </form>
+    </div>
+</body>
+</html>

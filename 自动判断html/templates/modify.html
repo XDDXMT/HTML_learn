@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>修改变量</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2 {
+            color: #34495e;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #3498db;
+        }
+        p.error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function showMessage() {
+            alert("修改成功！");
+        }
+    </script>
+</head>
+<body>
+    <h1>修改变量</h1>
+    <form method="POST">
+        <h2>用户数据</h2>
+        <textarea name="users" rows="10">{{ users | tojson }}</textarea>
+        <h2>已完成的问题数据</h2>
+        <textarea name="completed_questions" rows="10">{{ completed_questions | tojson }}</textarea>
+        <h2>问题数据(仅查看)</h2>
+        <textarea name="questions" rows="10">{{ questions | tojson | safe }}</textarea>
+        <br>
+        <input type="submit" onclick="showMessage()" value="保存修改">
+        <a href="/admin" style="background-color: #dc3545;">不保存返回</a>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>

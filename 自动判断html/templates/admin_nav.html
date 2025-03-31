@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员导航</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .nav-button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>管理员导航</h1>
+    <a class="nav-button" href="{{ url_for('admin') }}">查看问题</a>
+    <a class="nav-button" href="{{ url_for('modify_variables') }}">修改变量</a>
+    <a class="nav-button" href="{{ url_for('add_question') }}">添加问题</a>
+    <a class="nav-button" href="{{ url_for('user_submissions') }}">查看用户提交</a>
+    <a class="nav-button" href="{{ url_for('logout') }}">退出登录</a>
+</body>
+</html>

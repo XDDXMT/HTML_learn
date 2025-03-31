@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题目列表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+            transition: box-shadow 0.3s;
+        }
+        li:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p {
+            color: #555;
+            margin: 10px 0 0;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .user-menu {
+            position: absolute;
+            right: 20px;
+            top: 50px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-menu">
+        {% if session['username'] %}
+            <div class="dropdown">
+                <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ session['username'] }}&emsp;&emsp;&emsp;&emsp;</span>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('user_home') }}">主页</a><br>
+                    <a href="{{ url_for('logout') }}">登出</a><br>
+                    <a href="{{ url_for('user_submissions') }}">查看历史提交</a>
+
+                </div>
+            </div>
+        {% else %}
+            <span>未登录</span>
+            <a href="{{ url_for('login') }}">登录</a>
+        {% endif %}
+    </div>
+
+    <h1>题目列表</h1>
+    <ul>
+    {% for question in questions %}
+        <li>
+            {% if session['username'] %}
+                <a href="{{ url_for('submit_code', question_id=question['id']) }}">{{ question['title'] }}</a>
+                <p>{{ question['description'] }}</p>
+                <p style="color: gray; font-size: smaller;">题目ID:{{ question['id'] }}</p>
+
+                {% if session['username'] and question['id'] in user_completed_questions %}
+                    <span style="color: #7CFC00;">该题目你已完成</span>
+                {% endif %}
+            {% else %}
+                            <span>此题目需要登录才能查看</span>
+            <a href="{{ url_for('login') }}">登录</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+    <a class="back-link" href="{{ url_for('home') }}">返回主页</a>
+</body>
+</html>
